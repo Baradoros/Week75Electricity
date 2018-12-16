@@ -4,8 +4,31 @@ using UnityEngine;
 
 public class RobotScript : MonoBehaviour {
     public RaycastHit2D Ray;
-    public int Direction;
+    public bool startMovingLeft = true;
     public GameObject RayTarget;
+    public Rigidbody2D rb2d { get; protected set; }
+    [SerializeField] float _moveSpeed = 3;
+    [SerializeField] bool _aiControlled = true;
+    public Vector2 direction { get; set; }
+    public Vector2 velocity
+    {
+        get { return rb2d.velocity; }
+        set { rb2d.velocity = value; }
+    }
+
+    public bool aiControlled { get { return _aiControlled; } }
+
+
+    void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+
+        if (startMovingLeft)
+            direction = Vector2.left;
+        else 
+            direction = Vector2.right;
+    }
+
 	// Use this for initialization
 	void Start () {
 		
@@ -13,6 +36,7 @@ public class RobotScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // Log the raycast target when it it found through raycasting
         Ray = Physics2D.Linecast(transform.position, RayTarget.transform.position);
         Debug.DrawLine(transform.position, RayTarget.transform.position );
         if (Ray)
@@ -23,8 +47,10 @@ public class RobotScript : MonoBehaviour {
         {
            transform.Rotate(0, 180, 0);
         }
-        transform.position += Direction*transform.right * Time.deltaTime; 
+
+        HandleMovement();
 	}
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "LightningBall" && other.gameObject != GetComponent<EnergyTransfer>().EBall) 
@@ -36,5 +62,13 @@ public class RobotScript : MonoBehaviour {
 
             Destroy(other.gameObject);
         }
+    }
+
+    protected virtual void HandleMovement()
+    {
+        // Keep moving this robot in one direction.
+        //transform.position += Direction * transform.right * Time.deltaTime;
+
+        velocity = direction * _moveSpeed;
     }
 }
