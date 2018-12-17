@@ -19,7 +19,7 @@ public class RobotScript : MonoBehaviour {
     public bool aiControlled { get { return _aiControlled; } }
 
 
-    void Awake()
+    protected virtual void Awake()
     {
         rb2d = GetComponent<Rigidbody2D>();
 
@@ -29,13 +29,8 @@ public class RobotScript : MonoBehaviour {
             direction = Vector2.right;
     }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
         // Log the raycast target when it it found through raycasting
         Ray = Physics2D.Linecast(transform.position, RayTarget.transform.position);
         Debug.DrawLine(transform.position, RayTarget.transform.position );
@@ -51,7 +46,7 @@ public class RobotScript : MonoBehaviour {
         HandleMovement();
 	}
 
-    void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "LightningBall" && other.gameObject != GetComponent<EnergyTransfer>().EBall) 
         {
