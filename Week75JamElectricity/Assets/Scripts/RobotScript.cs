@@ -7,8 +7,8 @@ public class RobotScript : MonoBehaviour {
     public bool startMovingLeft = true;
     public GameObject RayTarget;
     public Rigidbody2D rb2d { get; protected set; }
-    [SerializeField] float _moveSpeed = 3;
-    [SerializeField] bool _aiControlled = true;
+    [SerializeField] protected float _moveSpeed = 3;
+    [SerializeField] protected bool _aiControlled = true;
     public Vector2 direction { get; set; }
     public Vector2 velocity
     {
@@ -27,6 +27,8 @@ public class RobotScript : MonoBehaviour {
             direction = Vector2.left;
         else 
             direction = Vector2.right;
+
+        velocity = direction * _moveSpeed;
     }
 
 	// Update is called once per frame
