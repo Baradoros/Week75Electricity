@@ -24,7 +24,7 @@ namespace UnityStandardAssets._2D
         }
 
 
-        private void Update()
+        private void LateUpdate()
         {
             // only update lookahead pos if accelerating or changed direction
             float xMoveDelta = (target.position - m_LastTargetPosition).x;
