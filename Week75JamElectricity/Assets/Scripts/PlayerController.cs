@@ -47,9 +47,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     bool CheckForGround() {
-        if (Physics2D.OverlapCircle(groundDetector.position, groundCheckRadius, whatIsGround))
+        if (Physics2D.OverlapCircle(groundDetector.position, groundCheckRadius, whatIsGround)) {
             return true;
-        else
+        }
+        else {
             return false;
+        }
     }
 }
