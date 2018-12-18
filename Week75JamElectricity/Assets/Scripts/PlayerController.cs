@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
     public LayerMask whatIsGround;
 
     private Rigidbody2D rb2d;
+    private bool canJump = true;
 
     void Start() {
         rb2d = GetComponent<Rigidbody2D>();
@@ -37,12 +38,16 @@ public class PlayerController : MonoBehaviour {
 
         rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * maxSpeed, rb2d.velocity.y);    // Left right movement
 
-        if (Input.GetAxisRaw("Jump") != 0 && CheckForGround()) {                                     // Jump
+        if (Input.GetAxisRaw("Jump") != 0 && CheckForGround() && canJump) {                                     // Jump
             rb2d.velocity = new Vector2(rb2d.velocity.x, jumpHeight);
+            canJump = false;
         }
 
-        if (Input.GetAxisRaw("Jump") == 0 && !CheckForGround() && rb2d.velocity.y > 0) {
-            rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y / 2);
+        if (Input.GetAxisRaw("Jump") == 0) {
+            if (rb2d.velocity.y > 0)
+                rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y / 2);
+
+            canJump = true;
         }
     }
 
