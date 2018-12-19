@@ -19,7 +19,7 @@ public class RobotScript : MonoBehaviour {
         set { rb2d.velocity = value; }
     }
 
-    public bool aiControlled { get { return _aiControlled; } }
+    public bool aiControlled { get { return _aiControlled; } set { _aiControlled = value; } }
 
 
     protected virtual void Awake()
