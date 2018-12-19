@@ -22,17 +22,13 @@ public class MilitaryRobot : JumpingRobot
         ChangeGunSettings();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
-        HandleAIControls();
+        UpdateGunPosition();
     }
 
     protected override void HandleAIControls()
@@ -60,4 +56,33 @@ public class MilitaryRobot : JumpingRobot
             aiShotTimer = 1 / aiShootInterval;
         }
     }
+
+    protected override void HandlePlayerControls()
+    {
+        base.HandlePlayerControls();
+
+        // Update the direction so the shooting is as it should.
+        if (velocity.x < 0)
+            direction = Vector2.left;
+        else if (velocity.x > 0)
+            direction = Vector2.right;
+
+        // Let the player try to shoot the gun all the want. The fire rate will be handled by 
+        // the gun.
+        if (Input.GetButton("Fire1"))
+            gun.Shoot(direction);
+
+    }
+
+    protected virtual void UpdateGunPosition()
+    {
+        Vector3 offset = new Vector3(1.25f, 0, 0);
+
+        if (direction == Vector2.right)
+            gun.transform.position = transform.position + offset;
+        
+        else if (direction == Vector2.left)
+            gun.transform.position = transform.position - offset;
+    }
+
 }

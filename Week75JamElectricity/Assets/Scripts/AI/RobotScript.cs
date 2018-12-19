@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script for the most basic robot behaviour.
+/// </summary>
 public class RobotScript : MonoBehaviour {
     public RaycastHit2D Ray;
     public bool startMovingLeft = true;
@@ -23,12 +26,19 @@ public class RobotScript : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
 
-        if (startMovingLeft)
-            direction = Vector2.left;
-        else 
-            direction = Vector2.right;
+        if (aiControlled)
+        {
+            if (startMovingLeft)
+                direction = Vector2.left;
+            else 
+                direction = Vector2.right;
 
-        velocity = direction * _moveSpeed;
+            velocity = direction * _moveSpeed;
+        }
+
+        if (!aiControlled)
+            direction = Vector2.right;
+        
     }
 
 	// Update is called once per frame
@@ -71,12 +81,26 @@ public class RobotScript : MonoBehaviour {
         // Keep moving this robot in one direction.
         //transform.position += Direction * transform.right * Time.deltaTime;
 
-        velocity = direction * _moveSpeed;
+        velocity =          direction * _moveSpeed;
     }
 
 
     protected virtual void HandlePlayerControls()
     {
-
+        HandlePlayerMovement();
     }
+
+    protected virtual void HandlePlayerMovement()
+    {
+        // Just let the player move horizontally.
+        float hAxis =                   Input.GetAxisRaw("Horizontal");
+        //float yAxis = Input.GetAxisRaw("Vertical");
+
+        Vector2 newVel =                velocity;
+        newVel.x =                      hAxis * _moveSpeed;
+
+        velocity =                      newVel;
+    }
+
+    
 }

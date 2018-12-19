@@ -41,7 +41,7 @@ public class Gun2D : MonoBehaviour
 
             bullet.gameObject.layer = LayerMask.NameToLayer(bulletLayer);
 
-            bullet.velocity = shotForce;
+            bullet.velocity = shotForce * direction;
 
             // Set the timer for the delay between this and the next shot.
             fireTimer = 1 / fireRate;

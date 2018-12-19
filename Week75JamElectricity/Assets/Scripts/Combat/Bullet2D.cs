@@ -8,11 +8,15 @@ public class Bullet2D : MonoBehaviour
     [SerializeField] float damage;
     [Tooltip("How many objects this has to collide with before it is automatically erased.")]
     [SerializeField] int collisionsBeforeDeath = 1;
+    
+    [Tooltip("How many seconds this bullet is allowed to live, regardless of collisions.")]
+    [SerializeField] float lifetime = 3;
     [Tooltip("This bullet can damage things on these layers.")]
     [SerializeField] LayerMask damageOnLayers;
     [Tooltip("This bullet can damage things with any of these tags.")]
     [SerializeField] List<string> _damageWithTags;
     int collisionsDone = 0;
+    float deathTimer;
 
     public Rigidbody2D rb2d { get; protected set; }
     public Vector2 velocity 
@@ -33,8 +37,13 @@ public class Bullet2D : MonoBehaviour
     {
         collider = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
+        deathTimer = lifetime;
     }
 
+    void Update()
+    {
+        DeathCountdown();
+    }
    
    protected virtual void OnTriggerEnter2D(Collider2D other)
    {
@@ -71,5 +80,12 @@ public class Bullet2D : MonoBehaviour
         Destroy(this.gameObject);
    }
 
+    protected virtual void DeathCountdown()
+    {
+        if (deathTimer > 0)
+            deathTimer -= Time.deltaTime;
+        else if (deathTimer <= 0)
+            Destroy(this.gameObject);
+    }
 
 }

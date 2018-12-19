@@ -916,6 +916,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 887808230, guid: e9ec232c5d3472d4c86d917a4b950cb1, type: 3}
+      propertyPath: _aiControlled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9ec232c5d3472d4c86d917a4b950cb1, type: 3}
 --- !u!4 &887808228 stripped
@@ -1032,6 +1036,10 @@ PrefabInstance:
     - target: {fileID: 1127586499, guid: 63ae3a39dcab1e24d901438c37fddff5, type: 3}
       propertyPath: jumpForce.y
       value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127586499, guid: 63ae3a39dcab1e24d901438c37fddff5, type: 3}
+      propertyPath: _aiControlled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 516082567, guid: 63ae3a39dcab1e24d901438c37fddff5, type: 3}
       propertyPath: m_Layer
@@ -1528,6 +1536,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 1479505625, guid: 518dae51eab233f459fec199f9b48866, type: 3}
+      propertyPath: _aiControlled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 518dae51eab233f459fec199f9b48866, type: 3}
 --- !u!4 &1479505623 stripped
@@ -1751,7 +1763,7 @@ MonoBehaviour:
   RayTarget: {fileID: 0}
   _moveSpeed: 3
   _aiControlled: 1
-  jumpForce: {x: 0, y: 0}
+  jumpForce: {x: 0, y: 50}
   aiTargets:
     serializedVersion: 2
     m_Bits: 0
@@ -1794,6 +1806,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292391407745036870, guid: 3a70cfd9bca7ecd47b70824f311fdfcf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1292391407745036858, guid: 3a70cfd9bca7ecd47b70824f311fdfcf,
         type: 3}

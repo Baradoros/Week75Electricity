@@ -45,4 +45,13 @@ public class JumpingRobot : RobotScript
         newVel.x = direction.x * _moveSpeed;
         velocity = newVel;
     }
+
+    protected override void HandlePlayerControls()
+    {
+        base.HandlePlayerControls();
+
+        // Let the player jump when on the ground
+        if (onGround && Input.GetButton("Jump"))
+            Jump();
+    }
 }
