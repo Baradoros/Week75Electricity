@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 356738257585965681}
   - component: {fileID: 4678886705194911676}
   - component: {fileID: 4035295425386171708}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: DirectionReverser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

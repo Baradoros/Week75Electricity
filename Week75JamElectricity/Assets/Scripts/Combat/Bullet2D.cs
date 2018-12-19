@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Bullet2D : MonoBehaviour
 {
     [SerializeField] float damage;
@@ -10,7 +11,8 @@ public class Bullet2D : MonoBehaviour
     [Tooltip("This bullet can damage things on these layers.")]
     [SerializeField] LayerMask damageOnLayers;
     [Tooltip("This bullet can damage things with any of these tags.")]
-    [SerializeField] List<string> damageWithTags;
+    [SerializeField] List<string> _damageWithTags;
+    int collisionsDone = 0;
 
     public Rigidbody2D rb2d { get; protected set; }
     public Vector2 velocity 
@@ -19,8 +21,17 @@ public class Bullet2D : MonoBehaviour
         set { rb2d.velocity = value; }
     }
 
+    public List<string> damageWithTags
+    {
+        get { return _damageWithTags; }
+        protected set { _damageWithTags = value; }
+    }
+
+    public new Collider2D collider { get; set; }
+
     void Awake()
     {
+        collider = GetComponent<Collider2D>();
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -28,11 +39,15 @@ public class Bullet2D : MonoBehaviour
    protected virtual void OnTriggerEnter2D(Collider2D other)
    {
        HandleDamageApplication(other.gameObject);
+       collisionsDone++;
+       HandleSelfDestruction();
    }
 
    protected virtual void OnCollisionEnter2D(Collision2D other)
    {
        HandleDamageApplication(other.gameObject);
+       collisionsDone++;
+       HandleSelfDestruction();
    }
 
    void HandleDamageApplication(GameObject other)
@@ -48,6 +63,12 @@ public class Bullet2D : MonoBehaviour
 
         if (hasRightTag || inRightLayer)
             damageable.TakeDamage(damage, false);
+   }
+
+   void HandleSelfDestruction()
+   {
+       if (collisionsDone >= collisionsBeforeDeath)
+        Destroy(this.gameObject);
    }
 
 
