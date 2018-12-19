@@ -10,11 +10,7 @@ public class JumpingRobot : RobotScript
     [SerializeField] Vector2 jumpForce;
     bool onGround = true;
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-    }
+    // Collisions
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         bool touchedGround = other.gameObject.CompareTag("Ground");
@@ -26,26 +22,25 @@ public class JumpingRobot : RobotScript
         }
     }
 
-    protected override void Update()
-    {
-        HandleMovement();
-    }
+    
     protected virtual void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
             onGround = false;
     }
 
+    // Jumping and controls
     protected virtual void Jump()
     {
         rb2d.AddForce(jumpForce);
     }
 
-    protected override void HandleMovement()
+    protected override void HandleAIControls()
     {
         if (onGround)
             Jump();
 
+        // Keep the robot moving in the x direction when possible.
         Vector2 newVel = velocity;
         newVel.x = direction.x * _moveSpeed;
         velocity = newVel;

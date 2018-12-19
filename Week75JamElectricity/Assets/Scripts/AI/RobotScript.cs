@@ -33,6 +33,7 @@ public class RobotScript : MonoBehaviour {
 
 	// Update is called once per frame
 	protected virtual void Update () {
+        /* 
         // Log the raycast target when it it found through raycasting
         Ray = Physics2D.Linecast(transform.position, RayTarget.transform.position);
         Debug.DrawLine(transform.position, RayTarget.transform.position );
@@ -44,8 +45,12 @@ public class RobotScript : MonoBehaviour {
         {
            transform.Rotate(0, 180, 0);
         }
+        */
+        if (aiControlled)
+            HandleAIControls();
 
-        HandleMovement();
+        if (!aiControlled)
+            HandlePlayerControls();
 	}
 
     protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -56,16 +61,22 @@ public class RobotScript : MonoBehaviour {
             GetComponent<RobotScript>().enabled = false;
             GetComponent<PlayerController>().enabled = true;
             GetComponent<EnergyTransfer>().enabled = true;
-
+            
             Destroy(other.gameObject);
         }
     }
 
-    protected virtual void HandleMovement()
+    protected virtual void HandleAIControls()
     {
         // Keep moving this robot in one direction.
         //transform.position += Direction * transform.right * Time.deltaTime;
 
         velocity = direction * _moveSpeed;
+    }
+
+
+    protected virtual void HandlePlayerControls()
+    {
+
     }
 }
