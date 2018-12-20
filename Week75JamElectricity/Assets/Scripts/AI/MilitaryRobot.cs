@@ -67,7 +67,7 @@ public class MilitaryRobot : JumpingRobot
         else if (velocity.x > 0)
             direction = Vector2.right;
 
-        // Let the player try to shoot the gun all the want. The fire rate will be handled by 
+        // Let the player try to shoot the gun all they want. The fire rate will be handled by 
         // the gun.
         if (Input.GetButton("Fire1"))
             gun.Shoot(direction);
