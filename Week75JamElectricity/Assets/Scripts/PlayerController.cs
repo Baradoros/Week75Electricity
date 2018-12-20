@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : JumpingRobot {
 
     public Transform spawn;
 
@@ -22,19 +22,20 @@ public class PlayerController : MonoBehaviour {
     bool controllingOtherRobot = false;
     bool controlledByPlayer = true;
 
-    private Rigidbody2D rb2d;
     private bool canJump = true;
 
-    void Start() {
-        rb2d = GetComponent<Rigidbody2D>();
+    protected override void Awake()
+    {
+        base.Awake();
+        aiControlled = false;
     }
 
-    void Update() {
-
+    protected override void Update() {
         if (!controlledByPlayer)
             return;
 
-        HandleMovement();
+        HandlePlayerControls();
+        //HandleMovement();
         ResetOnFall(resetPosition);
         ShowSwapRadius();
         HandleRoboSwapping();
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    [System.Obsolete]
     void HandleMovement() 
     {
 
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour {
             //  Find the nearest enemy within a given radius.
             var enemies = 
                                     (from enemy in GameObject.FindObjectsOfType<RobotScript>()
-                                    where Vector2.Distance(thisPos, enemy.transform.position) <= swapRadius
+                                    where Vector2.Distance(thisPos, enemy.transform.position) <= swapRadius && enemy.aiControlled
                                     select enemy).OrderBy(enem => Vector2.Distance(thisPos, enem.transform.position));
 
             if (enemies.Count() == 0)

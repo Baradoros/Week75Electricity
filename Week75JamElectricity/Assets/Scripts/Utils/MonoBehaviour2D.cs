@@ -8,7 +8,7 @@ using UnityEngine.Events;
 /// Contains fields and such we want all of our custom 2D Monobehaviours in this game to have.
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
-public class CSS_MonoBehaviour2D : MonoBehaviour 
+public class MonoBehaviour2D : MonoBehaviour 
 {
 	public SpriteRenderer spriteRenderer 		{ get; protected set; }
 	new public Collider2D collider 				{ get; protected set; }

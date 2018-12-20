@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class DamageOnContact2D : CSS_MonoBehaviour2D
+public class DamageOnContact2D : MonoBehaviour2D
 {
 	[Tooltip("Anything with these tags can be damaged by this object.")]
 	[SerializeField] List<string> contactTags;
