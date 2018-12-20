@@ -590,7 +590,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3038532672be23f4782ca4e57e38d467, type: 3}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 2
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
@@ -600,7 +600,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Programming\n\t\t\tBaradoros\n\t\t\tTespy\n\t\t\tSting\n\n\n\nArt\n\t\t\ttrollface666\n\n\n\n\nGame
+  m_Text: "Programming\n\t\t\tBaradoros\n\t\t\tTespy\n\n\n\nArt\n\t\t\ttrollface666\n\n\n\n\nGame
     Design\n\t\t\tBaradoros\n\t\t\ttrollface666\n"
 --- !u!222 &2098645829
 CanvasRenderer:
