@@ -5,6 +5,7 @@ using System.Linq;
 
 public class PlayerController : JumpingRobot {
 
+    [SerializeField] FloatReference health;
     public Transform spawn;
 
     [Header("Player Parameters")]
@@ -39,6 +40,7 @@ public class PlayerController : JumpingRobot {
         ResetOnFall(resetPosition);
         ShowSwapRadius();
         HandleRoboSwapping();
+        CheckForDeath();
     }
 
     private void ResetOnFall(float distance) 
@@ -130,5 +132,14 @@ public class PlayerController : JumpingRobot {
         Debug.DrawLine(thisPos, eastEnd, Color.red);
         Debug.DrawLine(thisPos, southEnd, Color.red);
         Debug.DrawLine(thisPos, westEnd, Color.red);
+    }
+
+    void CheckForDeath()
+    {
+        if (health.value <= 0)
+        {
+            Destroy(this.gameObject);
+            GameManager.manager.LoadScene("Game Over", 1.0f);
+        }
     }
 }

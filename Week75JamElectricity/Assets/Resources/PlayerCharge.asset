@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab88ba75d77a5ed4088d523a185c3ac2, type: 3}
   m_Name: PlayerCharge
   m_EditorClassIdentifier: 
-  value: 94.08973
+  value: -0.0019218144
   maxValue: 100
   resetOnPlayModeExit: 1
